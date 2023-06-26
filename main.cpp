@@ -59,3 +59,22 @@ public:
         this->next = nullptr ;
     }
 };
+class storelist 
+{
+public:
+    Store * head;
+    storelist() //Constructor
+    {
+      head = nullptr ;
+    }
+    ~storelist() //destructor 
+    {
+      Store * T = this->head ;
+      while ( this->head != nullptr )
+      {
+        this->head = head->next;
+        delete T;
+        T = this-> head ;
+      }
+    }
+};
