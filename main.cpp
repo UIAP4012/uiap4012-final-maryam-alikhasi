@@ -118,5 +118,21 @@ public:
         }
       }
     }
+    void edit(const string& name, const string& newid , const long int & newnumber , const long double & newprice ) // edit product
+    {
+      Store * tmp = head ;
+      while (tmp != nullptr)
+      {
+        if (tmp->name == name)
+        {
+          tmp->Number = newnumber ;
+          tmp->ID = newid ;
+          tmp->price = newprice ;
+          return ;
+        }else
+          tmp = tmp->next ;
+      }
+    }
+   
    
 };
