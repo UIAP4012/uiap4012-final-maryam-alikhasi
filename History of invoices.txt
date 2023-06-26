@@ -1,4 +1,0 @@
-Product Name :pen   The number of purchases :2   Unit amount :200000   Total amount paid :400000
-*********************************************************
-Product Name :pen   The number of purchases :2   Unit amount :200000   Total amount paid :400000
-*********************************************************
