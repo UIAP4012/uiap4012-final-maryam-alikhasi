@@ -96,4 +96,27 @@ public:
             saver->next = tmp ; // push back    
         }
     }
+    void remove(const string & name) // delete product with name 
+    {
+      Store *p = head;
+      Store *n = NULL;
+      if(p->name == name)  
+      {
+        head = head->next;
+        delete p;
+        return ;
+      }
+      while (true)
+      {
+        n = p;
+        p = p->next;
+        if (p->name == name)
+        {
+          n->next = p->next ;  
+          delete p;
+          break;
+        }
+      }
+    }
+   
 };
