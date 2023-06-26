@@ -133,6 +133,15 @@ public:
           tmp = tmp->next ;
       }
     }
+    void print() 
+    {
+      Store * tmp = head ;
+      while (tmp != nullptr)
+      {
+        cout << "  name : " << tmp->name << "  ID : " << tmp->ID << "   number : " << tmp->Number << "   price : " << tmp->price << endl ;
+        tmp = tmp->next ; 
+      }
+    }
    
    
 };
