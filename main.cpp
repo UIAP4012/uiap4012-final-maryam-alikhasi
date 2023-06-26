@@ -293,5 +293,29 @@ int main ()
     temp.close() ;
     remove("money.txt") ;
     rename("temp.txt", "money.txt") ;
+    // performance 
+    cout << "Hello , Welcome to stationery" << endl ; 
+    cout << "1 : login \t 2 : Register " << endl ;
+    int choice ;
+    cin >> choice ;
+    if (choice == 1)
+    {
+        bool xx ;
+        xx = x.user_login (keyuser) ;
+        if (xx == true)
+        {
+            cout << "You have successfully logged in " << endl ;
+        }else 
+        {
+            cout << "The password is not correct " << endl ;
+            return 0 ;
+        } 
+    }
+    else if (choice == 2)
+    {
+        x.user_register (keyuser) ;
+        cout << "Your registration was successful " << endl ;
+        return 0 ;
+    }
 }
     
