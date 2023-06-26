@@ -231,6 +231,16 @@ public:
         file.close() ;
     }   
 };
+void menu ()
+{
+    cout << "1 : Show inventory " << endl ;
+    cout << "2 : Edit items " << endl ;
+    cout << "3 : Add items " << endl ;
+    cout << "4 : Delete items " << endl ;
+    cout << "5 : Issuing an invoice to the customer " << endl ;
+    cout << "6 : Exchange rate update " << endl ; 
+    cout << "7 : Exit" << endl ;
+}
 int main ()
 {
 
@@ -317,5 +327,106 @@ int main ()
         cout << "Your registration was successful " << endl ;
         return 0 ;
     }
+    while (true)
+    {
+        menu() ;
+        cout << "Choose the option you want " << endl ;
+        cin >> choice ;
+        if (choice == 1 )
+        {
+            product.print() ;
+        }
+        else if (choice == 2)
+        {
+            string change_id ;
+            long double change_price ;
+            long int num ;
+            string goods ;
+            cout << "Which product do you want to change ? " << endl ;
+            cin >> goods ;
+            cout << "Write the new ID , price and number of the product " << endl ;
+            cin >> change_id ;
+            cin >> change_price ;
+            cin >> num ;
+            product.edit(goods , change_id , num , change_price) ;
+        }
+        else if (choice == 3)
+        {
+            string id ;
+            string name ;
+            long double price ;
+            long int number ;
+            cout << "Please write the name, ID, price and number of the product " << endl ;
+            cin >> name ;
+            cin >> id ;
+            cin >> price ;
+            cin >> number ;
+            product.addpro(name , id , number , price) ;
+        }
+        else if (choice == 4)
+        {   
+            string goods ;
+            cout << "Which product do you want to delete ? " << endl ;
+            cin >> goods ;
+            product.remove(goods) ;
+        }
+        else if (choice == 5)
+        {
+            string goods ;
+            int number ;
+            string rate ;
+            cout << "Which product was purchased ? " << endl ;
+            cin >> goods ;
+            cout << "Enter the number of goods and the selected exchange rate " << endl ;
+            cin >> number ;
+            cin >> rate ;
+            product.invoice(goods , number , rate) ;
+        }
+        else if (choice == 6)
+        {
+            cout << "1 : Change the US dollar rate \t 2 : Change the Euro rate " << endl ;
+            int rate ;
+            long double change_rate ;
+            string line ;
+            cin >> rate ;
+            cout << "Enter the revised rate " << endl ;
+            cin >>  change_rate ;
+            if (rate == 1)
+            {
+                ifstream oldFile("money.txt");
+                ofstream newFile("new.txt");
+                if(!oldFile.is_open() || !newFile.is_open()) 
+                    cout << "Error opening files!" << endl;
+                getline(oldFile, line);
+                getline(oldFile, line);
+                newFile << "1 Rial " << change_rate << " USD" << endl ;
+                newFile << line << endl ;
+                oldFile.close();
+                newFile.close();
+                remove("money.txt");
+                rename("new.txt", "money.txt");
+            }
+            if (rate == 2)
+            {
+                ifstream oldFile("money.txt");
+                ofstream newFile("new.txt");
+                if (!oldFile.is_open() || !newFile.is_open()) 
+                    cout << "Error opening files!" << endl;
+                getline(oldFile, line);
+                newFile << line << endl ;
+                newFile << "1 Rial " << change_rate << " EUR" << endl ;
+                oldFile.close();
+                newFile.close();
+                remove("money.txt");
+                rename("new.txt", "money.txt");
+            }
+        }
+        else if (choice == 7)
+        {
+            product.datafile();
+            break;
+        }
+    }    
+
 }
     
