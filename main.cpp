@@ -188,7 +188,7 @@ public:
                     cout <<  "Unable to open file" ;
                 }
                 file.close() ;
-                
+
                 //write csv file 
                 ofstream myfile ("invoice.csv");
                 if (myfile.is_open())
@@ -207,7 +207,27 @@ public:
                 tmp = tmp->next ;
         }
     }
-   
-   
-   
+    void datafile ()
+    {
+        // Save inventory of product in the file
+        Store * tmp = head ; 
+        ofstream file ;
+        file.open ("inventory.txt" ) ;
+        if (file.is_open()) 
+        {
+            while (tmp != nullptr)
+            {
+                file << tmp->name << endl ;
+                file << tmp->ID << endl ;
+                file << tmp->Number << endl ;
+                file << tmp->price << endl ;
+                tmp = tmp->next ; 
+            }
+        }
+        else
+        {
+            cout <<  "Unable to open file" ;
+        }
+        file.close() ;
+    }   
 };
