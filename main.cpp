@@ -142,6 +142,72 @@ public:
         tmp = tmp->next ; 
       }
     }
+    void invoice (string name , int n , string change)
+    {
+        Store * tmp = head ;
+        while (tmp != nullptr)
+        {
+            if (tmp->name == name)
+            {
+                // read money file
+                double money = 1 ;
+                if (change != "Rial")
+                {
+                    ifstream infile ("money.txt");
+                    while (! infile.eof())
+                    {
+                        double m1, m2;
+                        string c1, c2;
+                        infile >> m1 >> c1 >> m2 >> c2;
+                        if (c2 == change){
+                            money = m2;
+                            break;
+                        }
+                    }
+                    infile.close();
+                }
+                // Invoice printing
+                tmp->Number = tmp->Number - n ;
+                long double total_f = n*tmp->price ;
+                long double total = (n*tmp->price)*money ;
+                long double change_price = tmp->price*money ;
+                cout << "Product Name :" << tmp->name << "   The number of purchases :" << n ; 
+                cout << "   Unit amount :" << change_price << "   Total amount paid :" << total <<  endl ; 
+
+                //write History of invoices
+                ofstream file ;
+                file.open ("History of invoices.txt" , ios::app ) ;
+                if (file.is_open()) 
+                {
+                    file << "Product Name :" << tmp->name << "   The number of purchases :" << n ; 
+                    file << "   Unit amount :" << tmp->price << "   Total amount paid :" << total_f <<  endl ;
+                    file << "*********************************************************" << endl ;
+                }
+                else
+                {
+                    cout <<  "Unable to open file" ;
+                }
+                file.close() ;
+                
+                //write csv file 
+                ofstream myfile ("invoice.csv");
+                if (myfile.is_open())
+                {
+                    myfile << "Product Name,The number of purchases,Unit amount,Total amount paid\n" ;
+                    myfile << name << "," << n << "," << tmp->price << "," << total_f << endl ;
+                }
+                else
+                {
+                    cout <<  "Unable to open file" ;
+                }
+                myfile.close() ;
+                return ;
+            }   
+            else
+                tmp = tmp->next ;
+        }
+    }
+   
    
    
 };
