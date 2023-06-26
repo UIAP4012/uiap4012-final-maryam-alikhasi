@@ -77,4 +77,23 @@ public:
         T = this-> head ;
       }
     }
+    void addpro(const string& name , const string& id , const long int & number , const long double & price)
+    {
+        Store * tmp = new Store( name , id , number , price) ;
+        tmp->next = nullptr ;
+        if (head == nullptr)
+        {
+            head = tmp ;
+        }
+        else 
+        {
+            Store * saver = head ;
+            while (saver->next != nullptr) 
+            {      
+                
+                saver = saver->next ;
+            }
+            saver->next = tmp ; // push back    
+        }
+    }
 };
