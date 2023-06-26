@@ -231,3 +231,67 @@ public:
         file.close() ;
     }   
 };
+int main ()
+{
+
+    storelist product ;
+    //Read user files 
+    map < string , string > keyuser;
+    ifstream file("users.txt");
+    users x ;
+    if (file.is_open()) 
+    {
+        while (file >> x.username >> x.password)
+        {
+            keyuser[x.username] = x.password;
+        }
+    }
+    file.close();
+
+    //read inventory file
+    ifstream myfile ("inventory.txt");
+    vector<string> lines;
+    string line;
+    bool add = false ;
+    if (myfile.is_open()) 
+    {
+        while (myfile >> line)
+        {
+            lines.push_back(line) ;
+            add = true ;
+        }
+    }
+    myfile.close();
+    if (add == true)
+    {
+        string name , price , number , id ;
+        for (int i = 0; i < lines.size(); i+=4)
+        {
+            name = lines[i] ;
+            id = lines[i+1] ;
+            number = lines[i+2] ;
+            price = lines[i+3] ;
+            long int num = stoi(number) ;
+            long double pri = stod(price) ;
+            product.addpro(name , id , num , pri) ;
+        }
+    }
+    //write money file 
+    ifstream outfile("money.txt");
+    ofstream temp ("temp.txt") ;
+    string line2 ;
+    while (!outfile.eof())
+    {
+        double m1, m2;
+        string c1, c2;
+        outfile >> m1 >> c1 >> m2 >> c2;
+        if (c1.size() == 0 && c2.size() == 0)
+            break;
+        temp << m1 << " " << c1 << " " <<  m2  << " " << c2 << endl ;
+    }
+    outfile.close() ;
+    temp.close() ;
+    remove("money.txt") ;
+    rename("temp.txt", "money.txt") ;
+}
+    
