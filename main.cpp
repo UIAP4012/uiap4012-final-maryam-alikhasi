@@ -27,4 +27,18 @@ public :
         }
         file.close();
     }
+    bool user_login (map < string , string > & keyuser)
+    {
+        cout << "Enter username: ";
+        cin >> username;
+        cout << "Enter password: ";
+        cin >> password;
+        auto it = keyuser.find(username);
+        if (it != keyuser.end() && it->second == password) 
+        {
+            cout << "Login successful\n";
+            return true;
+        }
+        return false;
+    }
 };
